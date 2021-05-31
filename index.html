@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRIGHTNESS MEASURE</title>
+</head>
+<style>
+    /* Write all CSS here ! */
+
+    /* Reset to da */
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        background: #f1f3f8;
+    }
+
+    img {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 200px;
+        width: 200px;
+        border-radius: 100%;
+    }
+</style>
+
+<body>
+    <img src="logo.png" alt="logo">
+
+    <h2>Reading : null</h2>
+</body>
+<script>
+
+
+    const sensor = new AmbientLightSensor();
+
+    sensor.start();
+
+    sensor.addEventListener("reading", senseReadings);
+
+    function senseReadings() {
+        const reading = sensor.illuminance;
+
+        document.querySelector("h2").innerText = "Reading :" + reading;
+
+        if (reading < 30) {
+            document.querySelector("h2").innerText = "Reading :" + reading;
+            document.body.style.background = "#1c1d1e";
+        } else {
+
+            if (reading > 100) {
+                document.querySelector("h2").innerText = "Reading :" + reading;
+                document.body.style.background = "red";
+            } else {
+                document.querySelector("h2").innerText = "Reading :" + reading;
+                document.body.style.background = "#f1f3f8";
+            }
+
+        }
+    }
+</script>
+
+</html>
